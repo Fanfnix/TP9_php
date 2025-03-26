@@ -18,7 +18,10 @@ $resultat->execute() or die(print_r($resultat->errorInfo()));
 $professeurs = $resultat->fetchAll(PDO::FETCH_CLASS);
 
 echo "<h2>Liste Etudiants</h2><ul>";
-foreach ($etudiants as $etudiant) echo "<li> $etudiant->nom $etudiant->prenom </li>";
+foreach ($etudiants as $etudiant) {
+    $adresse = "views/modif_etudiant.php?id=".$etudiant->id;
+    echo "<li> $etudiant->nom $etudiant->prenom <a href=$adresse>Modifier</a></li>";
+}
 echo "</ul>";
 
 echo "<h2>Liste Classes</h2><ul>";
