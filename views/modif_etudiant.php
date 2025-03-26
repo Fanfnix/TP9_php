@@ -3,7 +3,7 @@
 <a href="../index.php">Retour Index</a>
 
 <?php
-    $modif = $dbPDO->prepare("SELECT * FROM etudiants WHERE id=:id;");
+    $modif = $dbPDO->prepare("SELECT * FROM etudiants WHERE id=:id");
     $modif->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
     $modif->execute() or die(print_r($modif->errorInfo()));
     $etudiant = $modif->fetchAll(PDO::FETCH_CLASS);
