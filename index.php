@@ -29,4 +29,37 @@ echo "<h2>Liste Classes</h2><ul>";
 foreach ($professeurs as $professeur) echo "<li> $professeur->nom $professeur->prenom | $professeur->libelle - $professeur->lib</li>";
 echo "</ul>";
 
+$ajout = $dbPDO->prepare("INSERT INTO matiere (lib) VALUES ('Maths')");
+$ajout->execute() or die(print_r($ajout->errorInfo()));
+$result = $ajout->fetchAll(PDO::FETCH_CLASS);
+
 ?>
+
+<form action="views/nouvelle_matiere.php" method="post">
+    <label for="matiere">Entrez une matière à ajouter</label>
+    <input type="text" name="matiere"/>
+    <input type="submit" value="Valider"/>
+</form>
+
+<form action="views/nouvel_etudiant.php" method="post">
+    <label for="prenom">Entrez prenom de l'étudiant</label>
+    <input type="text" name="prenom"/>
+
+    <label for="nom">Entrez nom de l'étudiant</label>
+    <input type="text" name="nom"/>
+
+    <label>Choix classe</label>
+    <select name="classe_id">
+        <?php
+            $resultat = $dbPDO->prepare("SELECT * FROM classes");
+            $resultat->execute() or die(print_r($resultat->errorInfo()));
+            $classes = $resultat->fetchAll(PDO::FETCH_CLASS);
+            foreach ($classes as $classe) {
+                $choix = $classe->id;
+                $text = $classe->libelle;
+                echo "<option value=$choix>$text</option>";
+            }
+        ?>
+    </select>
+    <input type="submit" value="Valider"/>
+</form>
