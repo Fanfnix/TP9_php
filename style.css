@@ -1,5 +1,5 @@
 thead {
-    color: rgb(100,100,100);
+    color: rgb(50,50,50);
     text-transform: uppercase;
     background-color: rgb(150,150,150);
 }
@@ -8,4 +8,36 @@ th {
     padding-block: 6px;
     padding-inline: 3px;
     border: 2px solid black;
+}
+
+#connection {
+    display: flex;
+    flex-direction: column;
+    width: 12%;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(150,150,150);
+    color: rgb(50,50,50);
+}
+
+.champ {
+    padding: 1em;
+    input {
+        background-color: rgb(50,50,50);
+        border: 2px solid rgb(100,100,100);
+        border-radius: 10px;
+        color: rgb(150,150,150);
+        padding-inline: 10px;
+        padding-block: 5px;
+    }
+}
+
+button {
+    margin: 10px;
+    padding-inline: 20px;
+    padding-block: 5px;
+    background-color: rgb(100,100,100);
+    color: rgb(50,50,50);
+    border: 2px solid rgb(70,70,70);
+    border-radius: 10px;
 }

@@ -1,8 +1,20 @@
 <?php require_once("model/pdo.php") ?>
 
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
+<head> <link rel="stylesheet" href="style.css"> </head>
+
+<form action="views/admin.php" method="post" id="connection">
+    <div class="champ">
+        <label for="identifiant">Entrez identifiant</label>
+        <input type="text" name="identifiant" required/>
+    </div>
+
+    <div class="champ">
+    <label for="password">Entrez mot-de-passe</label>
+    <input type="text" name="password" required/>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
 
 <?php
 
@@ -28,18 +40,12 @@ echo "<table><thead>";
 echo "<tr>
         <th scope='col'>Prenom</th>
         <th scope='col'>Nom</th>
-        <th scope='col'>Modifier</th>
-        <th scope='col'>Supprimer</th>
     </tr>";
 echo "</thead><tbody>";
 foreach ($etudiants as $etudiant) {
-    $adresse_modif = "views/modif_etudiant.php?id=".$etudiant->id;
-    $adresse_suppr = "views/suppression_etudiant.php?id=".$etudiant->id;
     echo "<tr>
-        <th scope='col'>$etudiant->nom</th>
         <th scope='col'>$etudiant->prenom</th>
-        <th scope='col'><a href=$adresse_modif>Modifier</a></th>
-        <th scope='col'><a href=$adresse_suppr>Supprimer</a></th>
+        <th scope='col'>$etudiant->nom</th>
     </tr>";
 }
 echo "</tbody></table>";
@@ -83,34 +89,3 @@ foreach ($professeurs as $professeur) {
 echo "</tbody></table>";
 
 ?>
-
-<!-- Formulaire -->
-
-<form action="views/nouvelle_matiere.php" method="post">
-    <label for="matiere">Entrez une matière à ajouter</label>
-    <input type="text" name="matiere"/>
-    <input type="submit" value="Valider"/>
-</form>
-
-<form action="views/nouvel_etudiant.php" method="post">
-    <label for="prenom">Entrez prenom de l'étudiant</label>
-    <input type="text" name="prenom"/>
-
-    <label for="nom">Entrez nom de l'étudiant</label>
-    <input type="text" name="nom"/>
-
-    <label>Choix classe</label>
-    <select name="classe_id">
-        <?php
-            $resultat = $dbPDO->prepare("SELECT * FROM classes");
-            $resultat->execute() or die(print_r($resultat->errorInfo()));
-            $classes = $resultat->fetchAll(PDO::FETCH_CLASS);
-            foreach ($classes as $classe) {
-                $choix = $classe->id;
-                $text = $classe->libelle;
-                echo "<option value=$choix>$text</option>";
-            }
-        ?>
-    </select>
-    <input type="submit" value="Valider"/>
-</form>
