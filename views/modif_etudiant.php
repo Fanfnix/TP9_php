@@ -28,7 +28,7 @@
     $modif->bindParam(':nom', $nom, PDO::PARAM_STR);
     $modif->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
     $modif->execute() or die(print_r($modif->errorInfo()));
-    $result = $ajout->fetchAll(PDO::FETCH_CLASS);
+    $result = $modif->fetchAll(PDO::FETCH_CLASS);
 
-    echo "Vous avez modifier ".$_POST['prenom']." ".$_POST['nom']." en classe d'id ".$_POST['classe_id'];
+    echo "Vous avez modifier ".$etudiant['prenom']." ".$etudiant['nom']." en classe d'id ".$etudiant['classe_id'];
 ?>

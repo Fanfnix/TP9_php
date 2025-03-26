@@ -19,8 +19,9 @@ $professeurs = $resultat->fetchAll(PDO::FETCH_CLASS);
 
 echo "<h2>Liste Etudiants</h2><ul>";
 foreach ($etudiants as $etudiant) {
-    $adresse = "views/modif_etudiant.php?id=".$etudiant->id;
-    echo "<li> $etudiant->nom $etudiant->prenom <a href=$adresse>Modifier</a></li>";
+    $adresse_modif = "views/modif_etudiant.php?id=".$etudiant->id;
+    $adresse_suppr = "views/suppression_etudiant.php?id=".$etudiant->id;
+    echo "<li> $etudiant->nom $etudiant->prenom <a href=$adresse_modif>Modifier</a> <a href=$adresse_suppr>Supprimer</a></li>";
 }
 echo "</ul>";
 
